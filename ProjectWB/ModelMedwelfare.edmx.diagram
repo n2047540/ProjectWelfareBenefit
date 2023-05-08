@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5ba5f354cb2344cc840be39c15fa3159" Name="Diagram1">
+        <EntityTypeShape EntityType="MedwelfareModel.Accountant" Width="1.5" PointX="0.75" PointY="8.5" />
+        <EntityTypeShape EntityType="MedwelfareModel.Employee" Width="1.5" PointX="3" PointY="1.375" />
+        <EntityTypeShape EntityType="MedwelfareModel.Evidence" Width="1.5" PointX="5.25" PointY="1" />
+        <EntityTypeShape EntityType="MedwelfareModel.Executive" Width="1.5" PointX="3" PointY="5.75" />
+        <EntityTypeShape EntityType="MedwelfareModel.HR" Width="1.5" PointX="5.75" PointY="5.75" />
+        <EntityTypeShape EntityType="MedwelfareModel.MoneyTransferStatus" Width="1.5" PointX="3" PointY="8.375" />
+        <EntityTypeShape EntityType="MedwelfareModel.RightEmp" Width="1.5" PointX="0.75" PointY="1.875" />
+        <EntityTypeShape EntityType="MedwelfareModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="0.75" />
+        <AssociationConnector Association="MedwelfareModel.FK_MoneyTransferStatus_Accountant" />
+        <AssociationConnector Association="MedwelfareModel.FK_Employee_Right" />
+        <AssociationConnector Association="MedwelfareModel.FK_Evidence_Employee" />
+        <AssociationConnector Association="MedwelfareModel.FK_Evidence_Executive" />
+        <AssociationConnector Association="MedwelfareModel.FK_Evidence_MoneyTransferStatus" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

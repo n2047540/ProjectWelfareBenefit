@@ -1,0 +1,322 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8A8B5422-61C9-47C6-ADB9-5B1E20DC9978}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>ProjectWB</RootNamespace>
+    <AssemblyName>ProjectWB</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Accountant.cs">
+      <DependentUpon>ModelMedwelfare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Employee.cs">
+      <DependentUpon>ModelMedwelfare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Evidence.cs">
+      <DependentUpon>ModelMedwelfare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Executive.cs">
+      <DependentUpon>ModelMedwelfare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FormEmp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormEmp.Designer.cs">
+      <DependentUpon>FormEmp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formexecutive.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formexecutive.Designer.cs">
+      <DependentUpon>Formexecutive.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormAccountant.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAccountant.Designer.cs">
+      <DependentUpon>FormAccountant.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formhr.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formhr.Designer.cs">
+      <DependentUpon>Formhr.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormLogin.Designer.cs">
+      <DependentUpon>FormLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formloginexe.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formloginexe.Designer.cs">
+      <DependentUpon>Formloginexe.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formloginhr.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formloginhr.Designer.cs">
+      <DependentUpon>Formloginhr.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formloginm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formloginm.Designer.cs">
+      <DependentUpon>Formloginm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMenu.Designer.cs">
+      <DependentUpon>FormMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormRemainwf.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormRemainwf.Designer.cs">
+      <DependentUpon>FormRemainwf.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormRequest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormRequest.Designer.cs">
+      <DependentUpon>FormRequest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormStatus.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormStatus.Designer.cs">
+      <DependentUpon>FormStatus.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HR.cs">
+      <DependentUpon>ModelMedwelfare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MedwelfareAccDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MedwelfareAccDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="MedwelfareEmpStatusDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MedwelfareEmpStatusDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="MedwelfareMTSDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MedwelfareMTSDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="MedwelfareRightEmpDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MedwelfareRightEmpDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="ModelMedwelfare.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelMedwelfare.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelMedwelfare.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelMedwelfare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelMedwelfare.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelMedwelfare.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="MoneyTransferStatus.cs">
+      <DependentUpon>ModelMedwelfare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RightEmp.cs">
+      <DependentUpon>ModelMedwelfare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sysdiagrams.cs">
+      <DependentUpon>ModelMedwelfare.tt</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="FormEmp.resx">
+      <DependentUpon>FormEmp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formexecutive.resx">
+      <DependentUpon>Formexecutive.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormAccountant.resx">
+      <DependentUpon>FormAccountant.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formhr.resx">
+      <DependentUpon>Formhr.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormLogin.resx">
+      <DependentUpon>FormLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formloginexe.resx">
+      <DependentUpon>Formloginexe.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formloginhr.resx">
+      <DependentUpon>Formloginhr.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formloginm.resx">
+      <DependentUpon>Formloginm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMenu.resx">
+      <DependentUpon>FormMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormRemainwf.resx">
+      <DependentUpon>FormRemainwf.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormRequest.resx">
+      <DependentUpon>FormRequest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormStatus.resx">
+      <DependentUpon>FormStatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EntityDeploy Include="ModelMedwelfare.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ModelMedwelfare.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="MedwelfareAccDataSet.xsc">
+      <DependentUpon>MedwelfareAccDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="MedwelfareAccDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>MedwelfareAccDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="MedwelfareAccDataSet.xss">
+      <DependentUpon>MedwelfareAccDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="MedwelfareEmpStatusDataSet.xsc">
+      <DependentUpon>MedwelfareEmpStatusDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="MedwelfareEmpStatusDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>MedwelfareEmpStatusDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="MedwelfareEmpStatusDataSet.xss">
+      <DependentUpon>MedwelfareEmpStatusDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="MedwelfareMTSDataSet.xsc">
+      <DependentUpon>MedwelfareMTSDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="MedwelfareMTSDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>MedwelfareMTSDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="MedwelfareMTSDataSet.xss">
+      <DependentUpon>MedwelfareMTSDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="MedwelfareRightEmpDataSet.xsc">
+      <DependentUpon>MedwelfareRightEmpDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="MedwelfareRightEmpDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>MedwelfareRightEmpDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="MedwelfareRightEmpDataSet.xss">
+      <DependentUpon>MedwelfareRightEmpDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="ModelMedwelfare.edmx.diagram">
+      <DependentUpon>ModelMedwelfare.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Screenshot 2022-11-07 091441.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ModelMedwelfare.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModelMedwelfare.edmx</DependentUpon>
+      <LastGenOutput>ModelMedwelfare.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="ModelMedwelfare.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModelMedwelfare.edmx</DependentUpon>
+      <LastGenOutput>ModelMedwelfare.cs</LastGenOutput>
+    </Content>
+    <None Include="Resources\4b7ea6b5165afd58bbe8a1f3983f82a2.jpg" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

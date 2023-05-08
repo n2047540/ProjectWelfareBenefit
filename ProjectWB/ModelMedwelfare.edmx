@@ -1,0 +1,506 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="MedwelfareModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Accountant">
+          <Key>
+            <PropertyRef Name="Acc_id" />
+          </Key>
+          <Property Name="Acc_id" Type="int" Nullable="false" />
+          <Property Name="Acc_name" Type="varchar" MaxLength="50" />
+          <Property Name="Acc_lastname" Type="varchar" MaxLength="50" />
+          <Property Name="Acc_password" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="Emp_id" />
+          </Key>
+          <Property Name="Emp_id" Type="int" Nullable="false" />
+          <Property Name="Emp_name" Type="varchar" MaxLength="50" />
+          <Property Name="Emp_lastname" Type="varchar" MaxLength="50" />
+          <Property Name="Emp_username" Type="varchar" MaxLength="20" />
+          <Property Name="Emp_password" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Emp_position" Type="varchar" MaxLength="50" />
+          <Property Name="Emp_Affiliation" Type="varchar" MaxLength="50" />
+          <Property Name="Emp_balance" Type="money" />
+          <Property Name="rig_no" Type="int" />
+        </EntityType>
+        <EntityType Name="Evidence">
+          <Key>
+            <PropertyRef Name="Evi_no" />
+          </Key>
+          <Property Name="Evi_no" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Evi_name" Type="varchar" MaxLength="20" />
+          <Property Name="Evi_position" Type="varchar" MaxLength="50" />
+          <Property Name="Evi_Affiliation" Type="varchar" MaxLength="50" />
+          <Property Name="Evi_right" Type="varchar" MaxLength="100" />
+          <Property Name="Evi_hospital" Type="varchar" MaxLength="50" />
+          <Property Name="Evi_ttmoney" Type="money" />
+          <Property Name="Evi_date" Type="datetime" />
+          <Property Name="Evi_approvalstatus" Type="varchar" MaxLength="30" />
+          <Property Name="Emp_id" Type="int" />
+          <Property Name="Exe_id" Type="int" />
+          <Property Name="MTS_no" Type="int" />
+        </EntityType>
+        <EntityType Name="Executive">
+          <Key>
+            <PropertyRef Name="Exe_id" />
+          </Key>
+          <Property Name="Exe_id" Type="int" Nullable="false" />
+          <Property Name="Exe_name" Type="varchar" MaxLength="20" />
+          <Property Name="Exe_lastname" Type="varchar" MaxLength="20" />
+          <Property Name="Exe_password" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="HR">
+          <Key>
+            <PropertyRef Name="HR_id" />
+          </Key>
+          <Property Name="HR_id" Type="int" Nullable="false" />
+          <Property Name="HR_name" Type="varchar" MaxLength="50" />
+          <Property Name="HR_lastname" Type="varchar" MaxLength="50" />
+          <Property Name="HR_username" Type="varchar" MaxLength="20" />
+          <Property Name="HR_password" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="HR_phone" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="MoneyTransferStatus">
+          <Key>
+            <PropertyRef Name="MTS_no" />
+          </Key>
+          <Property Name="MTS_no" Type="int" Nullable="false" />
+          <Property Name="MTS_status" Type="varchar" MaxLength="20" />
+          <Property Name="MTS_date" Type="datetime" />
+          <Property Name="Acc_id" Type="int" />
+        </EntityType>
+        <EntityType Name="RightEmp">
+          <Key>
+            <PropertyRef Name="rig_no" />
+          </Key>
+          <Property Name="rig_no" Type="int" Nullable="false" />
+          <Property Name="rig_name" Type="varchar" MaxLength="50" />
+          <Property Name="rig_balance" Type="money" />
+          <Property Name="rig_Uname" Type="varchar" MaxLength="50" />
+          <Property Name="rig_date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK_Employee_Right">
+          <End Role="RightEmp" Type="Self.RightEmp" Multiplicity="0..1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RightEmp">
+              <PropertyRef Name="rig_no" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="rig_no" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Evidence_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="Evidence" Type="Self.Evidence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Emp_id" />
+            </Principal>
+            <Dependent Role="Evidence">
+              <PropertyRef Name="Emp_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Evidence_Executive">
+          <End Role="Executive" Type="Self.Executive" Multiplicity="0..1" />
+          <End Role="Evidence" Type="Self.Evidence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Executive">
+              <PropertyRef Name="Exe_id" />
+            </Principal>
+            <Dependent Role="Evidence">
+              <PropertyRef Name="Exe_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Evidence_MoneyTransferStatus">
+          <End Role="MoneyTransferStatus" Type="Self.MoneyTransferStatus" Multiplicity="0..1" />
+          <End Role="Evidence" Type="Self.Evidence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MoneyTransferStatus">
+              <PropertyRef Name="MTS_no" />
+            </Principal>
+            <Dependent Role="Evidence">
+              <PropertyRef Name="MTS_no" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MoneyTransferStatus_Accountant">
+          <End Role="Accountant" Type="Self.Accountant" Multiplicity="0..1" />
+          <End Role="MoneyTransferStatus" Type="Self.MoneyTransferStatus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accountant">
+              <PropertyRef Name="Acc_id" />
+            </Principal>
+            <Dependent Role="MoneyTransferStatus">
+              <PropertyRef Name="Acc_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MedwelfareModelStoreContainer">
+          <EntitySet Name="Accountant" EntityType="Self.Accountant" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Evidence" EntityType="Self.Evidence" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Executive" EntityType="Self.Executive" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HR" EntityType="Self.HR" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MoneyTransferStatus" EntityType="Self.MoneyTransferStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RightEmp" EntityType="Self.RightEmp" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Employee_Right" Association="Self.FK_Employee_Right">
+            <End Role="RightEmp" EntitySet="RightEmp" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Evidence_Employee" Association="Self.FK_Evidence_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Evidence" EntitySet="Evidence" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Evidence_Executive" Association="Self.FK_Evidence_Executive">
+            <End Role="Executive" EntitySet="Executive" />
+            <End Role="Evidence" EntitySet="Evidence" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Evidence_MoneyTransferStatus" Association="Self.FK_Evidence_MoneyTransferStatus">
+            <End Role="MoneyTransferStatus" EntitySet="MoneyTransferStatus" />
+            <End Role="Evidence" EntitySet="Evidence" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MoneyTransferStatus_Accountant" Association="Self.FK_MoneyTransferStatus_Accountant">
+            <End Role="Accountant" EntitySet="Accountant" />
+            <End Role="MoneyTransferStatus" EntitySet="MoneyTransferStatus" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MedwelfareModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="MedwelfareEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Accountant" EntityType="MedwelfareModel.Accountant" />
+          <EntitySet Name="Employee" EntityType="MedwelfareModel.Employee" />
+          <EntitySet Name="Evidence" EntityType="MedwelfareModel.Evidence" />
+          <EntitySet Name="Executive" EntityType="MedwelfareModel.Executive" />
+          <EntitySet Name="HR" EntityType="MedwelfareModel.HR" />
+          <EntitySet Name="MoneyTransferStatus" EntityType="MedwelfareModel.MoneyTransferStatus" />
+          <EntitySet Name="RightEmp" EntityType="MedwelfareModel.RightEmp" />
+          <EntitySet Name="sysdiagrams" EntityType="MedwelfareModel.sysdiagrams" />
+          <AssociationSet Name="FK_MoneyTransferStatus_Accountant" Association="MedwelfareModel.FK_MoneyTransferStatus_Accountant">
+            <End Role="Accountant" EntitySet="Accountant" />
+            <End Role="MoneyTransferStatus" EntitySet="MoneyTransferStatus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_Right" Association="MedwelfareModel.FK_Employee_Right">
+            <End Role="RightEmp" EntitySet="RightEmp" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Evidence_Employee" Association="MedwelfareModel.FK_Evidence_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Evidence" EntitySet="Evidence" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Evidence_Executive" Association="MedwelfareModel.FK_Evidence_Executive">
+            <End Role="Executive" EntitySet="Executive" />
+            <End Role="Evidence" EntitySet="Evidence" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Evidence_MoneyTransferStatus" Association="MedwelfareModel.FK_Evidence_MoneyTransferStatus">
+            <End Role="MoneyTransferStatus" EntitySet="MoneyTransferStatus" />
+            <End Role="Evidence" EntitySet="Evidence" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Accountant">
+          <Key>
+            <PropertyRef Name="Acc_id" />
+          </Key>
+          <Property Name="Acc_id" Type="Int32" Nullable="false" />
+          <Property Name="Acc_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Acc_lastname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Acc_password" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="MoneyTransferStatus" Relationship="MedwelfareModel.FK_MoneyTransferStatus_Accountant" FromRole="Accountant" ToRole="MoneyTransferStatus" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="Emp_id" />
+          </Key>
+          <Property Name="Emp_id" Type="Int32" Nullable="false" />
+          <Property Name="Emp_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Emp_lastname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Emp_username" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Emp_password" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Emp_position" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Emp_Affiliation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Emp_balance" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="rig_no" Type="Int32" />
+          <NavigationProperty Name="RightEmp" Relationship="MedwelfareModel.FK_Employee_Right" FromRole="Employee" ToRole="RightEmp" />
+          <NavigationProperty Name="Evidence" Relationship="MedwelfareModel.FK_Evidence_Employee" FromRole="Employee" ToRole="Evidence" />
+        </EntityType>
+        <EntityType Name="Evidence">
+          <Key>
+            <PropertyRef Name="Evi_no" />
+          </Key>
+          <Property Name="Evi_no" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Evi_name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Evi_position" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Evi_Affiliation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Evi_right" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Evi_hospital" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Evi_ttmoney" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Evi_date" Type="DateTime" Precision="3" />
+          <Property Name="Evi_approvalstatus" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Emp_id" Type="Int32" />
+          <Property Name="Exe_id" Type="Int32" />
+          <Property Name="MTS_no" Type="Int32" />
+          <NavigationProperty Name="Employee" Relationship="MedwelfareModel.FK_Evidence_Employee" FromRole="Evidence" ToRole="Employee" />
+          <NavigationProperty Name="Executive" Relationship="MedwelfareModel.FK_Evidence_Executive" FromRole="Evidence" ToRole="Executive" />
+          <NavigationProperty Name="MoneyTransferStatus" Relationship="MedwelfareModel.FK_Evidence_MoneyTransferStatus" FromRole="Evidence" ToRole="MoneyTransferStatus" />
+        </EntityType>
+        <EntityType Name="Executive">
+          <Key>
+            <PropertyRef Name="Exe_id" />
+          </Key>
+          <Property Name="Exe_id" Type="Int32" Nullable="false" />
+          <Property Name="Exe_name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Exe_lastname" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Exe_password" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Evidence" Relationship="MedwelfareModel.FK_Evidence_Executive" FromRole="Executive" ToRole="Evidence" />
+        </EntityType>
+        <EntityType Name="HR">
+          <Key>
+            <PropertyRef Name="HR_id" />
+          </Key>
+          <Property Name="HR_id" Type="Int32" Nullable="false" />
+          <Property Name="HR_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="HR_lastname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="HR_username" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="HR_password" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="HR_phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="MoneyTransferStatus">
+          <Key>
+            <PropertyRef Name="MTS_no" />
+          </Key>
+          <Property Name="MTS_no" Type="Int32" Nullable="false" />
+          <Property Name="MTS_status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="MTS_date" Type="DateTime" Precision="3" />
+          <Property Name="Acc_id" Type="Int32" />
+          <NavigationProperty Name="Accountant" Relationship="MedwelfareModel.FK_MoneyTransferStatus_Accountant" FromRole="MoneyTransferStatus" ToRole="Accountant" />
+          <NavigationProperty Name="Evidence" Relationship="MedwelfareModel.FK_Evidence_MoneyTransferStatus" FromRole="MoneyTransferStatus" ToRole="Evidence" />
+        </EntityType>
+        <EntityType Name="RightEmp">
+          <Key>
+            <PropertyRef Name="rig_no" />
+          </Key>
+          <Property Name="rig_no" Type="Int32" Nullable="false" />
+          <Property Name="rig_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="rig_balance" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="rig_Uname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="rig_date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Employee" Relationship="MedwelfareModel.FK_Employee_Right" FromRole="RightEmp" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_MoneyTransferStatus_Accountant">
+          <End Type="MedwelfareModel.Accountant" Role="Accountant" Multiplicity="0..1" />
+          <End Type="MedwelfareModel.MoneyTransferStatus" Role="MoneyTransferStatus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accountant">
+              <PropertyRef Name="Acc_id" />
+            </Principal>
+            <Dependent Role="MoneyTransferStatus">
+              <PropertyRef Name="Acc_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_Right">
+          <End Type="MedwelfareModel.RightEmp" Role="RightEmp" Multiplicity="0..1" />
+          <End Type="MedwelfareModel.Employee" Role="Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RightEmp">
+              <PropertyRef Name="rig_no" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="rig_no" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Evidence_Employee">
+          <End Type="MedwelfareModel.Employee" Role="Employee" Multiplicity="0..1" />
+          <End Type="MedwelfareModel.Evidence" Role="Evidence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Emp_id" />
+            </Principal>
+            <Dependent Role="Evidence">
+              <PropertyRef Name="Emp_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Evidence_Executive">
+          <End Type="MedwelfareModel.Executive" Role="Executive" Multiplicity="0..1" />
+          <End Type="MedwelfareModel.Evidence" Role="Evidence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Executive">
+              <PropertyRef Name="Exe_id" />
+            </Principal>
+            <Dependent Role="Evidence">
+              <PropertyRef Name="Exe_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Evidence_MoneyTransferStatus">
+          <End Type="MedwelfareModel.MoneyTransferStatus" Role="MoneyTransferStatus" Multiplicity="0..1" />
+          <End Type="MedwelfareModel.Evidence" Role="Evidence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MoneyTransferStatus">
+              <PropertyRef Name="MTS_no" />
+            </Principal>
+            <Dependent Role="Evidence">
+              <PropertyRef Name="MTS_no" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MedwelfareModelStoreContainer" CdmEntityContainer="MedwelfareEntities1">
+          <EntitySetMapping Name="Accountant">
+            <EntityTypeMapping TypeName="MedwelfareModel.Accountant">
+              <MappingFragment StoreEntitySet="Accountant">
+                <ScalarProperty Name="Acc_password" ColumnName="Acc_password" />
+                <ScalarProperty Name="Acc_lastname" ColumnName="Acc_lastname" />
+                <ScalarProperty Name="Acc_name" ColumnName="Acc_name" />
+                <ScalarProperty Name="Acc_id" ColumnName="Acc_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employee">
+            <EntityTypeMapping TypeName="MedwelfareModel.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="rig_no" ColumnName="rig_no" />
+                <ScalarProperty Name="Emp_balance" ColumnName="Emp_balance" />
+                <ScalarProperty Name="Emp_Affiliation" ColumnName="Emp_Affiliation" />
+                <ScalarProperty Name="Emp_position" ColumnName="Emp_position" />
+                <ScalarProperty Name="Emp_password" ColumnName="Emp_password" />
+                <ScalarProperty Name="Emp_username" ColumnName="Emp_username" />
+                <ScalarProperty Name="Emp_lastname" ColumnName="Emp_lastname" />
+                <ScalarProperty Name="Emp_name" ColumnName="Emp_name" />
+                <ScalarProperty Name="Emp_id" ColumnName="Emp_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Evidence">
+            <EntityTypeMapping TypeName="MedwelfareModel.Evidence">
+              <MappingFragment StoreEntitySet="Evidence">
+                <ScalarProperty Name="MTS_no" ColumnName="MTS_no" />
+                <ScalarProperty Name="Exe_id" ColumnName="Exe_id" />
+                <ScalarProperty Name="Emp_id" ColumnName="Emp_id" />
+                <ScalarProperty Name="Evi_approvalstatus" ColumnName="Evi_approvalstatus" />
+                <ScalarProperty Name="Evi_date" ColumnName="Evi_date" />
+                <ScalarProperty Name="Evi_ttmoney" ColumnName="Evi_ttmoney" />
+                <ScalarProperty Name="Evi_hospital" ColumnName="Evi_hospital" />
+                <ScalarProperty Name="Evi_right" ColumnName="Evi_right" />
+                <ScalarProperty Name="Evi_Affiliation" ColumnName="Evi_Affiliation" />
+                <ScalarProperty Name="Evi_position" ColumnName="Evi_position" />
+                <ScalarProperty Name="Evi_name" ColumnName="Evi_name" />
+                <ScalarProperty Name="Evi_no" ColumnName="Evi_no" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Executive">
+            <EntityTypeMapping TypeName="MedwelfareModel.Executive">
+              <MappingFragment StoreEntitySet="Executive">
+                <ScalarProperty Name="Exe_password" ColumnName="Exe_password" />
+                <ScalarProperty Name="Exe_lastname" ColumnName="Exe_lastname" />
+                <ScalarProperty Name="Exe_name" ColumnName="Exe_name" />
+                <ScalarProperty Name="Exe_id" ColumnName="Exe_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HR">
+            <EntityTypeMapping TypeName="MedwelfareModel.HR">
+              <MappingFragment StoreEntitySet="HR">
+                <ScalarProperty Name="HR_phone" ColumnName="HR_phone" />
+                <ScalarProperty Name="HR_password" ColumnName="HR_password" />
+                <ScalarProperty Name="HR_username" ColumnName="HR_username" />
+                <ScalarProperty Name="HR_lastname" ColumnName="HR_lastname" />
+                <ScalarProperty Name="HR_name" ColumnName="HR_name" />
+                <ScalarProperty Name="HR_id" ColumnName="HR_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MoneyTransferStatus">
+            <EntityTypeMapping TypeName="MedwelfareModel.MoneyTransferStatus">
+              <MappingFragment StoreEntitySet="MoneyTransferStatus">
+                <ScalarProperty Name="Acc_id" ColumnName="Acc_id" />
+                <ScalarProperty Name="MTS_date" ColumnName="MTS_date" />
+                <ScalarProperty Name="MTS_status" ColumnName="MTS_status" />
+                <ScalarProperty Name="MTS_no" ColumnName="MTS_no" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RightEmp">
+            <EntityTypeMapping TypeName="MedwelfareModel.RightEmp">
+              <MappingFragment StoreEntitySet="RightEmp">
+                <ScalarProperty Name="rig_date" ColumnName="rig_date" />
+                <ScalarProperty Name="rig_Uname" ColumnName="rig_Uname" />
+                <ScalarProperty Name="rig_balance" ColumnName="rig_balance" />
+                <ScalarProperty Name="rig_name" ColumnName="rig_name" />
+                <ScalarProperty Name="rig_no" ColumnName="rig_no" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="MedwelfareModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
